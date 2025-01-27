@@ -4224,7 +4224,7 @@ inline bool parse_header(const char *beg, const char *end, T fn) {
     // value MUST either reject the message or replace each of
     // those characters with SP before further processing or
     // forwarding of that message.
-    static const std::string CR_LF_NUL("\r\n\0", 3);
+    static const std::string CR_LF_NUL("\r\0", 3); // CR_LF_NUL("\r\n\0", 3); // https://github.com/ggerganov/llama.cpp/issues/11335#issuecomment-2614759009
     if (val.find_first_of(CR_LF_NUL) != std::string::npos) { return false; }
 
     fn(key, val);
